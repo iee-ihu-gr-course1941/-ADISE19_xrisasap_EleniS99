@@ -133,10 +133,10 @@ DELIMITER ;
 
 DELIMITER $$
 
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board`()
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board`()
 BEGIN
 REPLACE INTO board SELECT * FROM p4;
-END */$$
+END;;
 DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
