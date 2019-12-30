@@ -1,0 +1,2 @@
+mysqldump ADISE19_xrisasap_EleniS99 -u it175071 -p -R  > basi.sql
+sed -i -r 's/DEFINER=`[^`]*`@`[^`]*`//g' basi.sql
