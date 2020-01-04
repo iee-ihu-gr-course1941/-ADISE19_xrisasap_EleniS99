@@ -1,5 +1,7 @@
 <?php
- 
+
+ini_set('display_errors','on' ); 
+
 require_once "lib/dbconnect.php";
 require_once "lib/board.php";
 require_once "lib/game.php";
