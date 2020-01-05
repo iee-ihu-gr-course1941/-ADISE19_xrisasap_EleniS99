@@ -1,7 +1,6 @@
 <?php
 $host='localhost';
 $db = 'adise19_xrisasap_EleniS99';
-require_once "config_local.php";
 
 $user=$DB_USER;
 $pass=$DB_PASS;
