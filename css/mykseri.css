@@ -1,4 +1,5 @@
 #kseri_table TD {width: 3em; height:3em;border:1px solid black;text-align:center;}
 #kseri_table {border-collapse: collapse;}
 TD.B_square {background-color:#3cb371;}
+TD.W_square {background-color:#3cb371;}
 IMG.piece {width: 2.1em; height:2.8em;}
