@@ -1,2 +1,7 @@
 config_local.php
 
+<?php
+
+	$DB_PASS = 'lala';
+	$DB_USER = 'root';
+?>
