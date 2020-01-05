@@ -1,7 +1,7 @@
 <?php
 $host='localhost';
 $db = 'THE_DB';
-require_once "db_upass.php";
+require_once ".gitignore";
 
 $user=$DB_USER;
 $pass=$DB_PASS;
