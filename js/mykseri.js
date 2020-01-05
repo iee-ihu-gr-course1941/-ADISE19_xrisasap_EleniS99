@@ -27,8 +27,8 @@ function fill_board_by_data(data) {
 	for(var i=0;i<data.length;i++) {
 		var o = data[i];
 		var id = '#square_'+ o.xeri1 +'_' + o.xeri2+'_'+o.katw+'_'+o.mirarma
-		
-		var im = (o.filla!=null)?'<img class="filla" src="images/piso.png">':'';
-				
+		var c = (o.filla!=null)?o.color + o.filla:'';
+		var im = (o.filla!=null)?'<img class="filla" src="images/'+c+'.png">':'';
+		$(id).addClass(o.color+'_square').html(im);		
 	}
 }
