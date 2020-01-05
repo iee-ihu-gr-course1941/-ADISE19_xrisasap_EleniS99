@@ -1,6 +1,6 @@
 <?php
 $host='localhost';
-$db = 'adise19_xrisasap_EleniS99';
+$db = 'ADISE19_xrisasap_EleniS99';
 
 $user=$DB_USER;
 $pass=$DB_PASS;
