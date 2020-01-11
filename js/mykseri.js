@@ -17,8 +17,8 @@ function draw_empty_board(p) {
 	
 	if(p!='1') {p='2';}
 	var draw_init = {
-		'1': {i1:5,i2:0,istep:-1,j1:1,j2:7,jstep:1},
-		'2': {i1:1,i2:7,istep:1, j1:5,j2:0,jstep:-1}
+		'1': {i1:7,i2:0,istep:-1,j1:1,j2:5,jstep:1},
+		'2': {i1:1,i2:5,istep:1, j1:7,j2:0,jstep:-1}
 	};
 	var s=draw_init[p];
 	var t='<table id="kseri_table">';
