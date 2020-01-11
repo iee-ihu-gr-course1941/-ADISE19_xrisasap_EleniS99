@@ -107,13 +107,14 @@ DROP TABLE IF EXISTS `players`;
 CREATE TABLE `players` (
   `username` varchar(20) CHARACTER SET utf8 DEFAULT 'null',
   `paiktis` int(4) NOT NULL,
+  `token` varchar(32) DEFAULT NULL,
   `idpaikti` int(4) NOT NULL,
   PRIMARY KEY (`paiktis`,`idpaikti`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `players` */
 
-insert  into `players`(`username`,`paiktis`,`idpaikti`) values ('',1,100),('',2,200);
+insert  into `players`(`username`,`paiktis`,`token`,`idpaikti`) values ('',1,'15d4c9daf64ac1f65a5801c0c107bf74',100),('',2,'89703ced141f2f7c3b0b04c050c96fb6',200);
 
 /* Trigger structure for table `game_status` */
 
