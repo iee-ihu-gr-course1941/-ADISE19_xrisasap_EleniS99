@@ -37,8 +37,8 @@ DROP TABLE IF EXISTS `game_status`;
 
 CREATE TABLE `game_status` (
   `status` enum('not active','initialized','started','\nended','aborded') NOT NULL DEFAULT 'not active',
-  `p_turn` enum('W','B') DEFAULT NULL,
-  `result` enum('B','W','D') DEFAULT NULL,
+  `p_turn` enum('1','2') DEFAULT NULL,
+  `result` enum('1','2','D') DEFAULT NULL,
   `last_change` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
