@@ -32,12 +32,13 @@ switch ($r=array_shift($request)) {
 			default:  header("HTTP/1.1 404 Not Found");
                         exit;
 }
-function handle_board($method) {
+function handle_board($method,$input) {
  
         if($method=='GET') {
                 show_board();
         } else if ($method=='POST') {
                 reset_board();
+		show_board($input);
         }
 		
 }
