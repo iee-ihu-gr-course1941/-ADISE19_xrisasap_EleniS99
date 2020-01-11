@@ -2,7 +2,8 @@
 SQLyog Enterprise Trial - MySQL GUI v7.11 
 MySQL - 5.5.5-10.4.10-MariaDB : Database - adise_xrisa_eleni
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
