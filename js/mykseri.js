@@ -28,7 +28,7 @@ function draw_empty_board() {
 }
 
 function fill_board() {
-	$.ajax({url: "https://users.it.teithe.gr/~it175071/ADISE19_xrisasap_EleniS99/test_show_board.php", 
+	$.ajax({url: "test_show_board.php", 
 		headers: {"X-Token": me.token},
 		success: fill_board_by_data });
 	
