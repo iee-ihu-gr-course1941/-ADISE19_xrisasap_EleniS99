@@ -15,13 +15,13 @@ $(function () {
 
 function draw_empty_board() {
 	var t='<table id="kseri_table">';
-	
-		t = '<tr>';
+	for(var i=5;i>0;i--) {
+		t += '<tr>';
 		for(var j=1;j<7;j++) {
-			t = <img class="piece" src="model/piso.png">':'';
+			t += '<td class="kseri_square" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
 		}
-		t='</tr>';
-	
+		t+='</tr>';
+	}
 	t+='</table>';
 	
 	$('#kseri_board').html(t);
@@ -109,4 +109,3 @@ function update_info(){
 	$('#game_info').html("I am Player: "+me.paiktis+", my name is "+me.username +'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+ game_status.p_turn+' must play now.');
 	
 }
-
