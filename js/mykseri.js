@@ -5,21 +5,21 @@ $(function () {
 
 
 function draw_empty_board() {
-	var t='<table id="kseri_table">';
+	var t='<table id="chess_table">';
 	for(var i=8;i>0;i--) {
 		t += '<tr>';
 		for(var j=1;j<9;j++) {
-			t += '<td class="kseri_square" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
+			t += '<td class="chess_square" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
 		}
 		t+='</tr>';
 	}
 	t+='</table>';
 	
-	$('#ksei_board').html(t);
+	$('#chess_board').html(t);
 }
 
 function fill_board() {
-	$.ajax({url: "kseri.php/board/", success: fill_board_by_data });
+	$.ajax({url: "chess.php/board/", success: fill_board_by_data });
 	
 }
 
