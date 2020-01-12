@@ -82,7 +82,7 @@ function login_error(data,y,z,c) {
 }
 
 function game_status_update() {
-	$.ajax({url: "kseri.php/status/", success: update_status, headers: {"X-Token": me.token} });
+	$.ajax({url: "test_show_board.php", success: update_status, headers: {"X-Token": me.token} });
 }
 
 function update_status(data) {
