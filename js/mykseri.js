@@ -1,6 +1,15 @@
+ var me={};
+var game_status={};
+
 $(function () {
 	draw_empty_board();
 	fill_board();
+	
+	$('#kseri_login').click( login_to_game);
+	$('#kseri_reset').click( reset_board);
+	
+	$('#move_div').hide();
+	game_status_update();
 });
 
 
