@@ -25,27 +25,29 @@ CREATE TABLE `board` (
   `filla` varchar(100) CHARACTER SET utf8 NOT NULL,
   `price` varchar(20) CHARACTER SET utf8 NOT NULL,
   `color` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `x` tinyint(1) NOT NULL,
   `y` tinyint(1) NOT NULL,
+  `x` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `board` */
 
-insert  into `board`(`id`,`filla`,`price`,`color`,`x`,`y`) values (1,'1','P','K',1,1),(2,'1','K','K',1,2),(3,'1','T','M',1,3),(4,'1','M','M',1,4),(5,'2','P','K',1,5),(6,'2','K','K',2,1),(7,'2','T','M',2,2),(8,'2','M','M',2,3),(9,'3','P','K',2,4),(10,'3','K','K',2,5),(11,'3','T','M',3,1),(12,'3','M','M',3,2),(14,'4','P','K',3,3),(15,'4','K','K',3,4),(16,'4','T','M',3,5),(17,'4','M','M',4,1),(18,'5','P','K',4,2),(19,'5','K','K',4,3),(20,'5','T','M',4,4),(21,'5','M','M',4,5),(22,'6','P','K',5,1),(23,'6','K','K',5,2),(24,'6','T','M',5,3),(25,'6','M','M',5,4),(26,'7','P','K',5,5),(27,'7','K','K',1,6),(28,'7','T','M',2,6),(29,'7','M','M',3,6),(30,'8','P','K',4,6),(31,'8','K','K',5,6),(32,'8','T','M',0,0),(33,'8','M','M',0,0),(34,'9','P','K',0,0),(35,'9','K','K',0,0),(36,'9','T','M',0,0),(37,'9','M','M',0,0),(38,'10','P','K',0,0),(39,'10','K','K',0,0),(40,'10','T','M',0,0),(41,'10','M','M',0,0),(42,'J','P','K',0,0),(43,'J','K','K',0,0),(45,'J','T','M',0,0),(46,'J','M','M',0,0),(47,'Q','P','K',0,0),(48,'Q','K','K',0,0),(49,'Q','T','M',0,0),(50,'Q','M','M',0,0),(51,'K','P','K',0,0),(52,'K','K','K',0,0),(53,'K','T','M',0,0),(54,'K','M','M',0,0);
+insert  into `board`(`id`,`filla`,`price`,`color`,`y`,`x`) values (1,'1','P','K',1,1),(2,'1','K','K',1,2),(3,'1','T','M',1,3),(4,'1','M','M',1,4),(5,'2','P','K',1,5),(6,'2','K','K',2,1),(7,'2','T','M',2,2),(8,'2','M','M',2,3),(9,'3','P','K',2,4),(10,'3','K','K',2,5),(11,'3','T','M',3,1),(12,'3','M','M',3,2),(14,'4','P','K',3,3),(15,'4','K','K',3,4),(16,'4','T','M',3,5),(17,'4','M','M',4,1),(18,'5','P','K',4,2),(19,'5','K','K',4,3),(20,'5','T','M',4,4),(21,'5','M','M',4,5),(22,'6','P','K',5,1),(23,'6','K','K',5,2),(24,'6','T','M',5,3),(25,'6','M','M',5,4),(26,'7','P','K',5,5),(27,'7','K','K',1,6),(28,'7','T','M',2,6),(29,'7','M','M',3,6),(30,'8','P','K',4,6),(31,'8','K','K',5,6),(32,'8','T','M',0,0),(33,'8','M','M',0,0),(34,'9','P','K',0,0),(35,'9','K','K',0,0),(36,'9','T','M',0,0),(37,'9','M','M',0,0),(38,'10','P','K',0,0),(39,'10','K','K',0,0),(40,'10','T','M',0,0),(41,'10','M','M',0,0),(42,'J','P','K',0,0),(43,'J','K','K',0,0),(45,'J','T','M',0,0),(46,'J','M','M',0,0),(47,'Q','P','K',0,0),(48,'Q','K','K',0,0),(49,'Q','T','M',0,0),(50,'Q','M','M',0,0),(51,'K','P','K',0,0),(52,'K','K','K',0,0),(53,'K','T','M',0,0),(54,'K','M','M',0,0);
 
 /*Table structure for table `game_status` */
 
 DROP TABLE IF EXISTS `game_status`;
 
 CREATE TABLE `game_status` (
-  `status` enum('not active','initialized','started','\nended','aborded') NOT NULL DEFAULT 'not active',
+  `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
   `p_turn` enum('1','2') DEFAULT NULL,
   `result` enum('1','2','D') DEFAULT NULL,
   `last_change` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `game_status` */
+
+insert  into `game_status`(`status`,`p_turn`,`result`,`last_change`) values ('aborded',NULL,'1','2020-01-12 13:22:02');
 
 /*Table structure for table `p1` */
 
@@ -112,12 +114,13 @@ CREATE TABLE `players` (
   `paiktis` int(4) NOT NULL,
   `token` varchar(32) DEFAULT NULL,
   `idpaikti` int(4) NOT NULL,
+  `last_action` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`paiktis`,`idpaikti`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 /*Data for the table `players` */
 
-insert  into `players`(`username`,`paiktis`,`token`,`idpaikti`) values ('',1,'15d4c9daf64ac1f65a5801c0c107bf74',100),('',2,'89703ced141f2f7c3b0b04c050c96fb6',200);
+insert  into `players`(`username`,`paiktis`,`token`,`idpaikti`,`last_action`) values ('',1,'15d4c9daf64ac1f65a5801c0c107bf74',100,'2020-01-12 13:31:43'),('',2,'89703ced141f2f7c3b0b04c050c96fb6',200,'2020-01-12 13:31:43');
 
 /* Trigger structure for table `game_status` */
 
@@ -146,4 +149,3 @@ DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-
