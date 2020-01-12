@@ -44,8 +44,8 @@ function fill_board_by_data(data) {
 		var o = data[i];
 		var id = '#square_'+ o.x +'_' + o.y;
 		var c = (o.filla!=null)?o.color + o.filla:'';
-		var im = (o.filla!=null)?'<img class="filla" src="model/'+c+'.png">':'';
-		$(id).addClass(o.b_color+'_square').html(im);
+		
+		$(id).addClass(o.color+'_square').html(c);
 		
 	}
 }
