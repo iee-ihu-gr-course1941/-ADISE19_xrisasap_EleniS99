@@ -1,4 +1,4 @@
- var me={};
+ var me={token:null,piece_color:null};
 var game_status={};
 
 $(function () {
@@ -30,10 +30,7 @@ function draw_empty_board() {
 function fill_board() {
 	$.ajax({url: "kseri.php/board/", 
 		headers: {"X-Token": me.token},
-			//dataType: "json",
-			//contentType: 'application/json',
-			//data: JSON.stringify( {token: me.token}),
-			success: fill_board_by_data });
+		success: fill_board_by_data });
 	
 }
 function reset_board() {
