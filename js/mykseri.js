@@ -15,13 +15,13 @@ $(function () {
 
 function draw_empty_board() {
 	var t='<table id="kseri_table">';
-	for(var i=5;i>0;i--) {
-		t += '<tr>';
+	
+		t = '<tr>';
 		for(var j=1;j<7;j++) {
-			t += '<td class="kseri_square" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
+			t = <img class="piece" src="model/piso.png">':'';
 		}
-		t+='</tr>';
-	}
+		t='</tr>';
+	
 	t+='</table>';
 	
 	$('#kseri_board').html(t);
