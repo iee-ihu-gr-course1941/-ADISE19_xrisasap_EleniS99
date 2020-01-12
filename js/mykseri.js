@@ -28,11 +28,16 @@ function draw_empty_board() {
 }
 
 function fill_board() {
-	$.ajax({url: "kseri.php/board/", success: fill_board_by_data });
+	$.ajax({url: "kseri.php/board/", 
+		headers: {"X-Token": me.token},
+			//dataType: "json",
+			//contentType: 'application/json',
+			//data: JSON.stringify( {token: me.token}),
+			success: fill_board_by_data });
 	
 }
 function reset_board() {
-	$.ajax({url: "kseri.php/board/", method: 'POST',  success: fill_board_by_data });
+	$.ajax({url: "kseri.php/board/",headers: {"X-Token": me.token}, method: 'POST',  success: fill_board_by_data });
 	$('#move_div').hide();
 	$('#game_initializer').show(2000);
 }
@@ -60,6 +65,7 @@ function login_to_game() {
 	$.ajax({url: "kseri.php/players/"+Paiktis, 
 			method: 'PUT',
 			dataType: "json",
+		        headers: {"X-Token": me.token},
 			contentType: 'application/json',
 			data: JSON.stringify( {username: $('#username').val(), paiktis: Paiktis}),
 			success: login_result,
@@ -79,15 +85,19 @@ function login_error(data,y,z,c) {
 }
 
 function game_status_update() {
-	$.ajax({url: "kseri.php/status/", success: update_status });
+	$.ajax({url: "kseri.php/status/", success: update_status, headers: {"X-Token": me.token} });
 }
 
 function update_status(data) {
+	var game_stat_old = game_status;
 	game_status=data[0];
 	update_info();
 	if(game_status.p_turn==me.paiktis &&  me.paiktis!=null) {
 		x=0;
 		// do play
+		if(game_stat_old.p_turn!=me.paiktis) {
+			fill_board();
+		}
 		$('#move_div').show(1000);
 		setTimeout(function() { game_status_update();}, 15000);
 	} else {
