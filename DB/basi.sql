@@ -39,13 +39,15 @@ insert  into `board`(`id`,`filla`,`price`,`color`,`x`,`y`) values (1,'1','P','K'
 DROP TABLE IF EXISTS `game_status`;
 
 CREATE TABLE `game_status` (
-  `status` enum('not active','initialized','started','\nended','aborded') NOT NULL DEFAULT 'not active',
+  `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
   `p_turn` enum('1','2') DEFAULT NULL,
   `result` enum('1','2','D') DEFAULT NULL,
   `last_change` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `game_status` */
+
+insert  into `game_status`(`status`,`p_turn`,`result`,`last_change`) values ('aborded',NULL,'1','2020-01-12 13:22:02');
 
 /*Table structure for table `p1` */
 
@@ -112,6 +114,7 @@ CREATE TABLE `players` (
   `paiktis` int(4) NOT NULL,
   `token` varchar(32) DEFAULT NULL,
   `idpaikti` int(4) NOT NULL,
+  `last_action` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`paiktis`,`idpaikti`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
@@ -141,6 +144,8 @@ DELIMITER $$
 /*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board`()
 BEGIN
 REPLACE INTO board SELECT * FROM p4;
+update `players` set username=null, token=null;
+update `game_status` set `status`='not active', `p_turn`=null, `result`=null;
 END */$$
 DELIMITER ;
 
