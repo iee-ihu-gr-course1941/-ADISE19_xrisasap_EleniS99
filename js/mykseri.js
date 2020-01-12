@@ -1,5 +1,8 @@
 var me={};
 var game_status={};
+var board={};
+var last_update=new Date().getTime();
+var timer=null;
 
 $(function () {
 	draw_empty_board();
@@ -36,22 +39,27 @@ function draw_empty_board(p) {
 
 function fill_board() {
 	$.ajax({url: "kseri.php/board/", success: fill_board_by_data });
+	headers: {"X-Token": me.token},
+		success: fill_board_by_data });
+
 	
 }
 
 function reset_board() {
-	$.ajax({url: "chess.php/board/", method: 'POST',  success: fill_board_by_data });
+	$.ajax({url: "chess.php/board/",headers: {"X-Token": me.token}, method: 'POST',  success: fill_board_by_data });
 	$('#move_div').hide();
 	$('#game_initializer').show(2000);
 }
 
 function fill_board_by_data(data) {
+	board=data;
 	for(var i=0;i<data.length;i++) {
 		var o = data[i];
 		var id = '#square_'+ o.x +'_' + o.y;
 		var c = (o.filla!=null)?o.color + o.filla:'';
-		var im = (o.filla!=null)?'<img class="filla" src="model/'+c+'.png">':'';
-		$(id).addClass(o.color+'_square').html(im);		
+		var pc= (o.filla!=null)?'filla'+o.color:'';
+		var im = (o.filla!=null)?'<img class="filla '+pc+'" src="model/'+c+'.png">':'';
+		$(id).addClass(o.table_color+'_square').html(im);		
 	}
 }
 
@@ -67,6 +75,7 @@ function login_to_game() {
 	$.ajax({url: "kseri.php/players/"+Paiktis, 
 			method: 'PUT',
 			dataType: "json",
+		        headers: {"X-Token": me.token},
 			contentType: 'application/json',
 			data: JSON.stringify( {username: $('#username').val(), paiktis: Paiktis}),
 			success: login_result,
@@ -86,21 +95,28 @@ function login_error(data,y,z,c) {
 }
 
 function game_status_update() {
-	$.ajax({url: "kseri.php/status/", success: update_status });
+	clearTimeout(timer);
+	$.ajax({url: "kseri.php/status/", success: update_status ,headers: {"X-Token": me.token} });
 }
 
 function update_status(data) {
+	last_update=new Date().getTime();
+	var game_stat_old = game_status;
 	game_status=data[0];
 	update_info();
+	clearTimeout(timer);
 	if(game_status.p_turn==me.paiktis &&  me.paiktis!=null) {
 		x=0;
 		// do play
+		if(game_stat_old.p_turn!=game_status.p_turn) {
+			fill_board();
+		}
 		$('#move_div').show(1000);
-		setTimeout(function() { game_status_update();}, 15000);
+		timer=setTimeout(function() { game_status_update();}, 15000);
 	} else {
 		// must wait for something
 		$('#move_div').hide(1000);
-		setTimeout(function() { game_status_update();}, 4000);
+		timer=setTimeout(function() { game_status_update();}, 4000);
 	}	
 } 
 function update_info(){
