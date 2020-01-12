@@ -31,6 +31,11 @@ function fill_board() {
 	$.ajax({url: "kseri.php/board/", success: fill_board_by_data });
 	
 }
+function reset_board() {
+	$.ajax({url: "kseri.php/board/", method: 'POST',  success: fill_board_by_data });
+	$('#move_div').hide();
+	$('#game_initializer').show(2000);
+}
 
 function fill_board_by_data(data) {
 	for(var i=0;i<data.length;i++) {
@@ -41,4 +46,38 @@ function fill_board_by_data(data) {
 		$(id).addClass(o.b_color+'_square').html(im);
 		
 	}
+}
+
+function login_to_game() {
+	if($('#username').val()=='') {
+		alert('You have to set a username');
+		return;
+	}
+	var Paiktis = $('#paiktis').val();
+	draw_empty_board(Paiktis);
+	fill_board();
+	
+	$.ajax({url: "kseri.php/players/"+Paiktis, 
+			method: 'PUT',
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify( {username: $('#username').val(), paiktis: Paiktis}),
+			success: login_result,
+			error: login_error});
+}
+
+function login_result(data) {
+	me = data[0];
+	$('#game_initializer').hide();
+	update_info();
+	game_status_update();
+}
+
+function login_error(data,y,z,c) {
+	var x = data.responseJSON;
+	alert(x.errormesg);
+}
+
+function game_status_update() {
+	$.ajax({url: "kseriphp/status/", success: update_status });
 }
