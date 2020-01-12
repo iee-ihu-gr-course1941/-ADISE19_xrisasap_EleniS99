@@ -1,4 +1,7 @@
 config_local.php
+*.swp
+*.swo
+
 
 <?php
 
