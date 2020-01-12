@@ -28,7 +28,7 @@ function draw_empty_board() {
 }
 
 function fill_board() {
-	$.ajax({url: "kseri.php/board/", 
+	$.ajax({url: "test_show_board.php", 
 		headers: {"X-Token": me.token},
 		success: fill_board_by_data });
 	
@@ -82,7 +82,7 @@ function login_error(data,y,z,c) {
 }
 
 function game_status_update() {
-	$.ajax({url: "test_show_board.php", success: update_status, headers: {"X-Token": me.token} });
+	$.ajax({url: "kseri.php/status/", success: update_status, headers: {"X-Token": me.token} });
 }
 
 function update_status(data) {
