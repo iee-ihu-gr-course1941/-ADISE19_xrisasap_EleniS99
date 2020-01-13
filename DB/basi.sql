@@ -16,6 +16,22 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`adise_xrisa_eleni` /*!40100 DEFAULT CHA
 
 USE `adise_xrisa_eleni`;
 
+/*Table structure for table `background` */
+
+DROP TABLE IF EXISTS `background`;
+
+CREATE TABLE `background` (
+  `kodikos` int(20) NOT NULL,
+  `x` tinyint(1) NOT NULL,
+  `y` tinyint(1) NOT NULL,
+  `color` varchar(20) NOT NULL,
+  PRIMARY KEY (`kodikos`,`x`,`y`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `background` */
+
+insert  into `background`(`kodikos`,`x`,`y`,`color`) values (0,1,2,'G'),(0,1,4,'G'),(0,2,2,'G'),(0,2,3,'G'),(0,2,4,'G'),(0,3,2,'G'),(0,3,4,'G'),(0,4,2,'G'),(0,4,4,'G'),(0,5,2,'G'),(0,5,4,'G'),(0,6,2,'G'),(0,6,3,'G'),(0,6,4,'G'),(1,1,1,'G'),(2,2,1,'G'),(3,3,1,'G'),(4,4,1,'G'),(5,5,1,'G'),(6,6,1,'G'),(7,1,5,'G'),(8,2,5,'G'),(9,3,5,'G'),(10,4,5,'G'),(11,5,5,'G'),(12,6,5,'G'),(13,1,3,'G'),(14,3,3,'G'),(15,4,3,'G'),(16,5,3,'G');
+
 /*Table structure for table `board` */
 
 DROP TABLE IF EXISTS `board`;
@@ -25,14 +41,12 @@ CREATE TABLE `board` (
   `filla` varchar(100) CHARACTER SET utf8 NOT NULL,
   `price` varchar(20) CHARACTER SET utf8 NOT NULL,
   `color` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `y` tinyint(1) NOT NULL,
-  `x` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `board` */
 
-insert  into `board`(`id`,`filla`,`price`,`color`,`y`,`x`) values (1,'1','P','K',1,1),(2,'1','K','K',1,2),(3,'1','T','M',1,3),(4,'1','M','M',1,4),(5,'2','P','K',1,5),(6,'2','K','K',2,1),(7,'2','T','M',2,2),(8,'2','M','M',2,3),(9,'3','P','K',2,4),(10,'3','K','K',2,5),(11,'3','T','M',3,1),(12,'3','M','M',3,2),(14,'4','P','K',3,3),(15,'4','K','K',3,4),(16,'4','T','M',3,5),(17,'4','M','M',4,1),(18,'5','P','K',4,2),(19,'5','K','K',4,3),(20,'5','T','M',4,4),(21,'5','M','M',4,5),(22,'6','P','K',5,1),(23,'6','K','K',5,2),(24,'6','T','M',5,3),(25,'6','M','M',5,4),(26,'7','P','K',5,5),(27,'7','K','K',1,6),(28,'7','T','M',2,6),(29,'7','M','M',3,6),(30,'8','P','K',4,6),(31,'8','K','K',5,6),(32,'8','T','M',0,0),(33,'8','M','M',0,0),(34,'9','P','K',0,0),(35,'9','K','K',0,0),(36,'9','T','M',0,0),(37,'9','M','M',0,0),(38,'10','P','K',0,0),(39,'10','K','K',0,0),(40,'10','T','M',0,0),(41,'10','M','M',0,0),(42,'J','P','K',0,0),(43,'J','K','K',0,0),(45,'J','T','M',0,0),(46,'J','M','M',0,0),(47,'Q','P','K',0,0),(48,'Q','K','K',0,0),(49,'Q','T','M',0,0),(50,'Q','M','M',0,0),(51,'K','P','K',0,0),(52,'K','K','K',0,0),(53,'K','T','M',0,0),(54,'K','M','M',0,0);
+insert  into `board`(`id`,`filla`,`price`,`color`) values (1,'1','P','K'),(2,'1','K','K'),(3,'1','T','M'),(4,'1','M','M'),(5,'2','P','K'),(6,'2','K','K'),(7,'2','T','M'),(8,'2','M','M'),(9,'3','P','K'),(10,'3','K','K'),(11,'3','T','M'),(12,'3','M','M'),(13,'4','P','K'),(14,'4','K','K'),(15,'4','T','M'),(16,'4','M','M'),(17,'5','P','K'),(18,'5','K','K'),(19,'5','T','M'),(20,'5','M','M'),(21,'6','P','K'),(22,'6','K','K'),(23,'6','T','M'),(24,'6','M','M'),(25,'7','P','K'),(26,'7','K','K'),(27,'7','T','M'),(28,'7','M','M'),(29,'8','P','K'),(30,'8','K','K'),(31,'8','T','M'),(32,'8','M','M'),(33,'9','P','K'),(34,'9','K','K'),(35,'9','T','M'),(36,'9','M','M'),(37,'10','P','K'),(38,'10','K','K'),(39,'10','T','M'),(40,'10','M','M'),(41,'J','P','K'),(42,'J','K','K'),(43,'J','T','M'),(44,'J','M','M'),(45,'Q','P','K'),(46,'Q','K','K'),(47,'Q','T','M'),(48,'Q','M','M'),(49,'K','P','K'),(50,'K','K','K'),(51,'K','T','M'),(52,'K','M','M');
 
 /*Table structure for table `game_status` */
 
@@ -55,13 +69,13 @@ DROP TABLE IF EXISTS `p1`;
 
 CREATE TABLE `p1` (
   `id` int(100) NOT NULL,
-  `xeri_1` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`,`xeri_1`)
+  `kodikos` int(20) NOT NULL,
+  PRIMARY KEY (`id`,`kodikos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `p1` */
 
-insert  into `p1`(`id`,`xeri_1`) values (1,'xeri1'),(2,'xeri1'),(3,'xeri1'),(4,'xeri1'),(5,'xeri1'),(6,'xeri1'),(7,'xeri1'),(8,'xeri1'),(9,'xeri1'),(10,'xeri1'),(11,'xeri1'),(12,'xeri1'),(13,'xeri1'),(14,'xeri1'),(15,'xeri1'),(16,'xeri1'),(17,'xeri1'),(18,'xeri1'),(19,'xeri1'),(20,'xeri1'),(21,'xeri1'),(22,'xeri1'),(23,'xeri1'),(24,'xeri1'),(25,'xeri1'),(26,'xeri1'),(27,'xeri1'),(28,'xeri1'),(29,'xeri1'),(30,'xeri1'),(31,'xari1'),(32,'xeri1'),(33,'xeri1'),(34,'xeri1'),(35,'xeri1'),(36,'xeri1'),(37,'xeri1'),(38,'xeri1'),(39,'xeri1'),(40,'xeri1'),(41,'xeri1'),(42,'xeri1'),(43,'xeri1'),(44,'xeri1'),(45,'xeri1'),(46,'xeri1'),(47,'xeri1'),(48,'xeri1'),(49,'xeri1'),(50,'xeri1'),(51,'xari1'),(52,'xeri1'),(53,'xeri1'),(54,'xeri1');
+insert  into `p1`(`id`,`kodikos`) values (1,0),(2,0),(3,0),(4,0),(5,2),(6,0),(7,0),(8,0),(9,0),(10,0),(11,0),(12,0),(13,1),(14,0),(15,0),(16,0),(17,0),(18,0),(19,0),(20,0),(21,0),(22,0),(23,5),(24,0),(25,0),(26,0),(27,0),(28,0),(29,4),(30,0),(31,0),(32,0),(33,0),(34,0),(35,0),(36,0),(37,3),(38,0),(39,0),(40,0),(41,0),(42,0),(43,0),(44,0),(45,0),(46,0),(47,0),(48,0),(49,0),(50,6),(51,0),(52,0);
 
 /*Table structure for table `p2` */
 
@@ -69,13 +83,13 @@ DROP TABLE IF EXISTS `p2`;
 
 CREATE TABLE `p2` (
   `id` int(100) NOT NULL,
-  `xeri_2` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`,`xeri_2`)
+  `kodikos` int(20) NOT NULL,
+  PRIMARY KEY (`id`,`kodikos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `p2` */
 
-insert  into `p2`(`id`,`xeri_2`) values (1,'xeri2'),(2,'xeri2'),(3,'xeri2'),(4,'xeri2'),(5,'xeri2'),(6,'xeri2'),(7,'xeri2'),(8,'xeri2'),(9,'xeri2'),(10,'xeri2'),(11,'xeri2'),(12,'xeri2'),(13,'xeri2'),(14,'xeri2'),(15,'xeri2'),(16,'xeri2'),(17,'xeri2'),(18,'xeri2'),(19,'xeri2'),(20,'xeri2'),(21,'xeri2'),(22,'xeri2'),(23,'xeri2'),(24,'xeri2'),(25,'xeri2'),(26,'xeri2'),(27,'xeri2'),(28,'xeri2'),(29,'xeri2'),(30,'xeri2'),(31,'xeri2'),(32,'xeri2'),(33,'xeri2'),(34,'xeri2'),(35,'xeri2'),(36,'xeri2'),(37,'xeri2'),(38,'xeri2'),(39,'xeri2'),(40,'xeri2'),(41,'xeri2'),(42,'xeri2'),(43,'xeri2'),(44,'xeri2'),(45,'xeri2'),(46,'xeri2'),(47,'xeri2'),(48,'xeri2'),(49,'xeri2'),(50,'xeri2'),(51,'xeri2'),(52,'xeri2'),(53,'xeri2'),(54,'xeri2');
+insert  into `p2`(`id`,`kodikos`) values (1,7),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,8),(9,0),(10,0),(11,0),(12,0),(13,0),(14,0),(15,9),(16,0),(17,0),(18,0),(19,0),(20,0),(21,0),(22,0),(23,0),(24,0),(25,0),(26,0),(27,0),(28,0),(29,0),(30,0),(31,0),(32,0),(33,0),(34,0),(35,0),(36,12),(37,0),(38,0),(39,11),(40,0),(41,0),(42,0),(43,0),(44,0),(45,0),(46,0),(47,10),(48,0),(49,0),(50,0),(51,0),(52,0);
 
 /*Table structure for table `p3` */
 
@@ -83,13 +97,13 @@ DROP TABLE IF EXISTS `p3`;
 
 CREATE TABLE `p3` (
   `id` int(100) NOT NULL,
-  `katw` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`,`katw`)
+  `kodikos` int(20) NOT NULL,
+  PRIMARY KEY (`id`,`kodikos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `p3` */
 
-insert  into `p3`(`id`,`katw`) values (1,'katw'),(2,'katw'),(3,'katw'),(4,'katw'),(5,'katw'),(6,'katw'),(7,'katw'),(8,'katw'),(9,'katw'),(10,'katw'),(11,'katw'),(12,'katw'),(13,'katw'),(14,'katw'),(15,'katw'),(16,'katw'),(17,'katw'),(18,'katw'),(19,'katw'),(20,'katw'),(21,'katw'),(22,'katw'),(23,'katw'),(24,'katw'),(25,'katw'),(26,'katw'),(27,'katw'),(28,'katw'),(29,'katw'),(30,'katw'),(31,'katw'),(32,'katw'),(33,'katw'),(34,'katw'),(35,'katw'),(36,'katw'),(37,'katw'),(38,'katw'),(39,'katw'),(40,'katw'),(41,'katw'),(42,'katw'),(43,'katw'),(44,'katw'),(45,'katw'),(46,'katw'),(47,'katw'),(48,'katw'),(49,'katw'),(50,'katw'),(51,'katw'),(52,'katw'),(53,'katw'),(54,'katw');
+insert  into `p3`(`id`,`kodikos`) values (1,0),(2,14),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0),(9,0),(10,0),(11,0),(12,0),(13,0),(14,0),(15,0),(16,0),(17,0),(18,0),(19,0),(20,15),(21,0),(22,0),(23,0),(24,0),(25,0),(26,0),(27,0),(28,0),(29,0),(30,0),(31,0),(32,0),(33,0),(34,0),(35,16),(36,0),(37,0),(38,0),(39,0),(40,0),(41,0),(42,0),(43,0),(44,0),(45,17),(46,0),(47,0),(48,0),(49,0),(50,0),(51,0),(52,0);
 
 /*Table structure for table `p4` */
 
@@ -97,13 +111,13 @@ DROP TABLE IF EXISTS `p4`;
 
 CREATE TABLE `p4` (
   `id` int(100) NOT NULL,
-  `mirasma` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`,`mirasma`)
+  `kodikos` int(20) NOT NULL,
+  PRIMARY KEY (`id`,`kodikos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `p4` */
 
-insert  into `p4`(`id`,`mirasma`) values (1,'mirasma'),(2,'mirasma'),(3,'mirasma'),(4,'mirasma'),(5,'mirasma'),(6,'mirasma'),(7,'mirasma'),(8,'mirasma'),(9,'mirasma'),(10,'mirasma'),(11,'mirasma'),(12,'mirasma'),(13,'mirasma'),(14,'mirasma'),(15,'mirasma'),(16,'mirasma'),(17,'mirasma'),(18,'mirasma'),(19,'mirasma'),(20,'mirasma'),(21,'mirasma'),(22,'mirasma'),(23,'mirasma'),(24,'mirasma'),(25,'mirasma'),(26,'mirasma'),(27,'mirasma'),(28,'mirasma'),(29,'mirasma'),(30,'mirasma'),(31,'mirasma'),(32,'mirasma'),(33,'mirasma'),(34,'mirasma'),(35,'mirasma'),(36,'mirasma'),(37,'mirasma'),(38,'mirasma'),(39,'mirasma'),(40,'mirasma'),(41,'mirasma'),(42,'mirasma'),(43,'mirasma'),(44,'mirasma'),(45,'mirasma'),(46,'mirasma'),(47,'mirasma'),(48,'mirasma'),(49,'mirasma'),(50,'mirasma'),(51,'mirasma'),(52,'mirasma'),(53,'mirasma'),(54,'mirasma');
+insert  into `p4`(`id`,`kodikos`) values (1,0),(2,0),(3,13),(4,13),(5,0),(6,13),(7,13),(8,0),(9,0),(10,13),(11,13),(12,13),(13,0),(14,13),(15,13),(16,13),(17,13),(18,13),(19,13),(20,0),(21,13),(22,13),(23,0),(24,13),(25,13),(26,13),(27,13),(28,13),(29,0),(30,13),(31,13),(32,13),(33,13),(34,13),(35,0),(36,0),(37,0),(38,13),(39,0),(40,13),(41,13),(42,13),(43,13),(44,13),(45,0),(46,13),(47,0),(48,13),(49,13),(50,0),(51,13),(52,13);
 
 /*Table structure for table `players` */
 
@@ -149,3 +163,4 @@ DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+
