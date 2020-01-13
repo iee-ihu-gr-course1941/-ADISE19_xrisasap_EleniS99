@@ -28,7 +28,7 @@ function draw_empty_board() {
 }
 
 function fill_board() {
-	$.ajax({url: "test_show_board.php", 
+	$.ajax({url: "kseri.php/board", 
 		headers: {"X-Token": me.token},
 		success: fill_board_by_data });
 	
