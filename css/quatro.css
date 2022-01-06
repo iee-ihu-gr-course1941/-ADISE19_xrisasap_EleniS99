@@ -4,13 +4,13 @@
     font-weight: bold;
     font-size: 16px;
     line-height: 24px;
-    background: #C20;
+    background: #C00;
     padding: 4px;
     text-align: center;
     margin-bottom: 1ex;
 }
-.won {background: #083; }
-.lost {background: #C20; }
+.won {background: #093; }
+.lost {background: #C00; }
 
 div#board {
         float: left;
@@ -22,7 +22,7 @@ div#board div {
         float: left;
         width: 75px;
         height: 75px;
-        border: 1px solid #888;
+        border: 1px solid #777;
         margin: 1px;
 }
 
