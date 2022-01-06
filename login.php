@@ -9,8 +9,8 @@ $GLOBALS['Player']->log_out(false, true);
 $meta['title'] = 'Login';
 $meta['show_menu'] = false;
 $meta['head_data'] = '
-    <script type="text/javascript" src="scripts/jquery.overlabel.js"></script>
-    <script type="text/javascript" src="scripts/jquery.showpass.js"></script>
+    <script type="text/javascript" src="scripts/overlabel.js"></script>
+    <script type="text/javascript" src="scripts/showpass.js"></script>
     <script type="text/javascript">//<![CDATA[
             jQuery(socument).ready( function($) {
                     $("div.formdiv label").not(".inline").overlabel();
