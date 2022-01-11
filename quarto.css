@@ -28,20 +28,8 @@ body {
   z-index: 15;
 }
 
-.menu button {
-  display: inline-block;
-  border: none;
-  background: lightblue;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 10px;
-  transition: background .5s;
-}
 
-button:hover {
-  cursor: pointer;
-  background: white;
-}
+
 
 table,
 td {
