@@ -1,129 +1,133 @@
-.msg,
-.finished {
-    color: #CCC;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    background: #C00;
-    padding: 4px;
-    text-align: center;
-    margin-bottom: 1ex;
-}
-.won {background: #093; }
-.lost {background: #C00; }
-
-div#board {
-        float: left;
-        margin: 10px 30px;
-        width: 345px;
+body {
+  margin: 0;
 }
 
-div#board div {
-        float: left;
-        width: 75px;
-        height: 75px;
-        border: 1px solid #777;
-        margin: 1px;
+.overlay {
+  position: fixed;
+  opacity: .5;
+  height: 100%;
+  width: 100%;
+  background: black;
+  z-index: 10;
+  transition: opacity .5s;
 }
 
-div#board div.corner {
-        border: 0;
-        width: 25px;
-        height: 25px;
-        margin: 2px;
+.overlay.hidden,
+.menu.hidden {
+  opacity: 0;
+  z-index: -1;
 }
 
-div#board div.top {
-        border: 0;
-        height: 25px;
-        line-height: 25px;
-        margin: 2px;
-        text-a;ign: center;
-        font-weight: bold;
-        font-size: 16px;
+.menu {
+  opacity: 1;
+  transition: opacity .5s;
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
 }
 
-div#board div.side {
-        border:0;
-        width: 25px;
-        line-height: 75px;
-        margin: 2px;
-        text-align: center;
-        font-weight: bold;
-        font-size: 16px;
+.menu button {
+  display: inline-block;
+  border: none;
+  background: lightblue;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  transition: background .5s;
 }
 
-div#board div.prevmove {
-        border: 2px solid #F00;
-        margin: 0px;
-        position: relative;
-        z-index: 2;
+button:hover {
+  cursor: pointer;
+  background: white;
 }
 
-div#board div.curmove {
-        border: 2px solid #FF0;
-        margin: 0px;
-        position: relative;
-        z-index: 4;
+table,
+td {
+  border: 1px solid black; 
+  border-collapse: collapse;
 }
 
-div#board div.highlighted {
-        border: 2px solid #C00;
-        margin: 0px;
+table {
+  position: relative;
+  margin: auto;
+  border-width: 3px;
+  width: 500px;
+  height: 500px;
 }
 
-div#info {
-        float: left;
-        width: 100px;
-        margin: 10px 30px;
-        padding-top: 100px;
+td {
+  position: relative;
+  width: 25%;
+  height: 25px;
+  padding: 2px;
 }
 
-div#pieces {
-        margin-left: 30px;
-        clear: both;
+.piece {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-div#pieces:after {
-        content: '.';
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
+.pieces-container {
+  margin: 20px auto 0;
+  width: 432px;
 }
 
-div#pieces div{
-        float: left;
-        width: 75px;
-        height: 75px;
-        margin: 1px;
+.pieces-container .piece {
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+  float: left;
+  margin: 1px;
+  border: 1px solid transparent;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 }
 
-.clr {
-        clear: both;
+.pieces-container .small {
+  width: 25px;
+  height: 25px;
 }
 
-#game div {
-        clear: both;
-        margin: 30px;
-        text-align: center;
+.pieces-container .piece:hover {
+  border: 1px solid black;
 }
 
-h2 span {
-        margin: 0 3em;
+.piece,
+.pierced::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#chats {
-        margin: 10px 30px;
-        height: auto;
+/* Pieces states */
+.red {
+  background: pink;
 }
 
-#chats .black {
-        color: #DDD;
-        background-color: #333;
+.blue {
+  background: lightblue;
 }
 
-#chats .private {
-        background-color: #BBF;
-        color: #000;
+.round {
+  border-radius: 50%;
+}
+
+.small {
+  width: 50%;
+  height: 50%;
+}
+
+.pierced::after {
+  display: block;
+  background: black;
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+  content:'';
 }
