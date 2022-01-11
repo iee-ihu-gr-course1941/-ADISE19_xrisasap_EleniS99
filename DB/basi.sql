@@ -1,166 +1,340 @@
+
 /*
 SQLyog Enterprise Trial - MySQL GUI v7.11 
 MySQL - 5.5.5-10.4.10-MariaDB : Database - adise_xrisa_eleni
-*********************************************************************
+*******************************************************************
 */
-
-
-/*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE=''*/;
-
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`adise_xrisa_eleni` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-
-USE `adise_xrisa_eleni`;
-
-/*Table structure for table `background` */
-
-DROP TABLE IF EXISTS `background`;
-
-CREATE TABLE `background` (
-  `kodikos` int(20) NOT NULL,
-  `x` tinyint(1) NOT NULL,
-  `y` tinyint(1) NOT NULL,
-  `color` varchar(20) NOT NULL,
-  PRIMARY KEY (`kodikos`,`x`,`y`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `background` */
-
-insert  into `background`(`kodikos`,`x`,`y`,`color`) values (0,1,2,'G'),(0,1,4,'G'),(0,2,2,'G'),(0,2,3,'G'),(0,2,4,'G'),(0,3,2,'G'),(0,3,4,'G'),(0,4,2,'G'),(0,4,4,'G'),(0,5,2,'G'),(0,5,4,'G'),(0,6,2,'G'),(0,6,3,'G'),(0,6,4,'G'),(1,1,1,'G'),(2,2,1,'G'),(3,3,1,'G'),(4,4,1,'G'),(5,5,1,'G'),(6,6,1,'G'),(7,1,5,'G'),(8,2,5,'G'),(9,3,5,'G'),(10,4,5,'G'),(11,5,5,'G'),(12,6,5,'G'),(13,1,3,'G'),(14,3,3,'G'),(15,4,3,'G'),(16,5,3,'G');
-
-/*Table structure for table `board` */
+--
+-- Table structure for table `board`
+--
 
 DROP TABLE IF EXISTS `board`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `board` (
-  `id` int(100) NOT NULL,
-  `filla` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `price` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `color` varchar(20) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `x` tinyint(1) NOT NULL,
+  `y` tinyint(1) NOT NULL,
+  `piece` int(11) DEFAULT NULL,
+  PRIMARY KEY (`x`,`y`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `board` */
+--
+-- Dumping data for table `board`
+--
 
-insert  into `board`(`id`,`filla`,`price`,`color`) values (1,'1','P','K'),(2,'1','K','K'),(3,'1','T','M'),(4,'1','M','M'),(5,'2','P','K'),(6,'2','K','K'),(7,'2','T','M'),(8,'2','M','M'),(9,'3','P','K'),(10,'3','K','K'),(11,'3','T','M'),(12,'3','M','M'),(13,'4','P','K'),(14,'4','K','K'),(15,'4','T','M'),(16,'4','M','M'),(17,'5','P','K'),(18,'5','K','K'),(19,'5','T','M'),(20,'5','M','M'),(21,'6','P','K'),(22,'6','K','K'),(23,'6','T','M'),(24,'6','M','M'),(25,'7','P','K'),(26,'7','K','K'),(27,'7','T','M'),(28,'7','M','M'),(29,'8','P','K'),(30,'8','K','K'),(31,'8','T','M'),(32,'8','M','M'),(33,'9','P','K'),(34,'9','K','K'),(35,'9','T','M'),(36,'9','M','M'),(37,'10','P','K'),(38,'10','K','K'),(39,'10','T','M'),(40,'10','M','M'),(41,'J','P','K'),(42,'J','K','K'),(43,'J','T','M'),(44,'J','M','M'),(45,'Q','P','K'),(46,'Q','K','K'),(47,'Q','T','M'),(48,'Q','M','M'),(49,'K','P','K'),(50,'K','K','K'),(51,'K','T','M'),(52,'K','M','M');
+LOCK TABLES `board` WRITE;
+/*!40000 ALTER TABLE `board` DISABLE KEYS */;
+INSERT INTO `board` VALUES (1,1,NULL),(1,2,NULL),(1,3,NULL),(1,4,NULL),(2,1,NULL),(2,2,NULL),(2,3,NULL),(2,4,NULL),(3,1,NULL),(3,2,NULL),(3,3,NULL),(3,4,NULL),(4,1,NULL),(4,2,NULL),(4,3,NULL),(4,4,NULL);
+/*!40000 ALTER TABLE `board` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Table structure for table `game_status` */
+--
+-- Table structure for table `board_empty`
+--
+
+DROP TABLE IF EXISTS `board_empty`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `board_empty` (
+  `x` tinyint(1) NOT NULL,
+  `y` tinyint(1) NOT NULL,
+  `piece` int(11) DEFAULT NULL,
+  PRIMARY KEY (`x`,`y`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `board_empty`
+--
+
+LOCK TABLES `board_empty` WRITE;
+/*!40000 ALTER TABLE `board_empty` DISABLE KEYS */;
+INSERT INTO `board_empty` VALUES (1,1,NULL),(1,2,NULL),(1,3,NULL),(1,4,NULL),(2,1,NULL),(2,2,NULL),(2,3,NULL),(2,4,NULL),(3,1,NULL),(3,2,NULL),(3,3,NULL),(3,4,NULL),(4,1,NULL),(4,2,NULL),(4,3,NULL),(4,4,NULL);
+/*!40000 ALTER TABLE `board_empty` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `game_status`
+--
 
 DROP TABLE IF EXISTS `game_status`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `game_status` (
   `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
-  `p_turn` enum('1','2') DEFAULT NULL,
-  `result` enum('1','2','D') DEFAULT NULL,
+  `p_turn` varchar(100) DEFAULT NULL,
+  `current_piece` int(11) DEFAULT NULL,
+  `result` varchar(1) DEFAULT NULL,
+  `win_direction` varchar(20) DEFAULT NULL,
   `last_change` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `game_status` */
+--
+-- Dumping data for table `game_status`
+--
 
-insert  into `game_status`(`status`,`p_turn`,`result`,`last_change`) values ('aborded',NULL,'1','2020-01-12 13:22:02');
+LOCK TABLES `game_status` WRITE;
+/*!40000 ALTER TABLE `game_status` DISABLE KEYS */;
+INSERT INTO `game_status` VALUES ('not active',NULL,NULL,NULL,'not set','2021-12-19 23:45:27');
+/*!40000 ALTER TABLE `game_status` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `game_status_update` BEFORE UPDATE ON `game_status` 
+    FOR EACH ROW BEGIN
+		set NEW.last_change = now();
+    END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
-/*Table structure for table `p1` */
+--
+-- Table structure for table `pieces`
+--
 
-DROP TABLE IF EXISTS `p1`;
+DROP TABLE IF EXISTS `pieces`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pieces` (
+  `pieces_id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_light` tinyint(1) NOT NULL,
+  `is_round` tinyint(1) NOT NULL,
+  `is_short` tinyint(1) NOT NULL,
+  `is_solid` tinyint(1) NOT NULL,
+  `available` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`pieces_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE `p1` (
-  `id` int(100) NOT NULL,
-  `kodikos` int(20) NOT NULL,
-  PRIMARY KEY (`id`,`kodikos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--
+-- Dumping data for table `pieces`
+--
 
-/*Data for the table `p1` */
+LOCK TABLES `pieces` WRITE;
+/*!40000 ALTER TABLE `pieces` DISABLE KEYS */;
+INSERT INTO `pieces` VALUES (1,1,0,0,1,1),(2,1,0,0,0,1),(3,1,0,1,1,1),(4,1,0,1,0,1),(5,1,1,0,1,1),(6,1,1,0,0,1),(7,1,1,1,1,1),(8,1,1,1,0,1),(9,0,0,0,1,1),(10,0,0,0,0,1),(11,0,0,1,1,1),(12,0,0,1,0,1),(13,0,1,0,1,1),(14,0,1,0,0,1),(15,0,1,1,1,1),(16,0,1,1,0,1);
+/*!40000 ALTER TABLE `pieces` ENABLE KEYS */;
+UNLOCK TABLES;
 
-insert  into `p1`(`id`,`kodikos`) values (1,0),(2,0),(3,0),(4,0),(5,2),(6,0),(7,0),(8,0),(9,0),(10,0),(11,0),(12,0),(13,1),(14,0),(15,0),(16,0),(17,0),(18,0),(19,0),(20,0),(21,0),(22,0),(23,5),(24,0),(25,0),(26,0),(27,0),(28,0),(29,4),(30,0),(31,0),(32,0),(33,0),(34,0),(35,0),(36,0),(37,3),(38,0),(39,0),(40,0),(41,0),(42,0),(43,0),(44,0),(45,0),(46,0),(47,0),(48,0),(49,0),(50,6),(51,0),(52,0);
+--
+-- Table structure for table `pieces_available`
+--
 
-/*Table structure for table `p2` */
+DROP TABLE IF EXISTS `pieces_available`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pieces_available` (
+  `pieces_id` int(11) NOT NULL AUTO_INCREMENT,
+  `is_light` tinyint(1) NOT NULL,
+  `is_round` tinyint(1) NOT NULL,
+  `is_short` tinyint(1) NOT NULL,
+  `is_solid` tinyint(1) NOT NULL,
+  `available` tinyint(1) DEFAULT 1,
+  PRIMARY KEY (`pieces_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `p2`;
+--
+-- Dumping data for table `pieces_available`
+--
 
-CREATE TABLE `p2` (
-  `id` int(100) NOT NULL,
-  `kodikos` int(20) NOT NULL,
-  PRIMARY KEY (`id`,`kodikos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+LOCK TABLES `pieces_available` WRITE;
+/*!40000 ALTER TABLE `pieces_available` DISABLE KEYS */;
+INSERT INTO `pieces_available` VALUES (1,1,0,0,1,1),(2,1,0,0,0,1),(3,1,0,1,1,1),(4,1,0,1,0,1),(5,1,1,0,1,1),(6,1,1,0,0,1),(7,1,1,1,1,1),(8,1,1,1,0,1),(9,0,0,0,1,1),(10,0,0,0,0,1),(11,0,0,1,1,1),(12,0,0,1,0,1),(13,0,1,0,1,1),(14,0,1,0,0,1),(15,0,1,1,1,1),(16,0,1,1,0,1);
+/*!40000 ALTER TABLE `pieces_available` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*Data for the table `p2` */
-
-insert  into `p2`(`id`,`kodikos`) values (1,7),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,8),(9,0),(10,0),(11,0),(12,0),(13,0),(14,0),(15,9),(16,0),(17,0),(18,0),(19,0),(20,0),(21,0),(22,0),(23,0),(24,0),(25,0),(26,0),(27,0),(28,0),(29,0),(30,0),(31,0),(32,0),(33,0),(34,0),(35,0),(36,12),(37,0),(38,0),(39,11),(40,0),(41,0),(42,0),(43,0),(44,0),(45,0),(46,0),(47,10),(48,0),(49,0),(50,0),(51,0),(52,0);
-
-/*Table structure for table `p3` */
-
-DROP TABLE IF EXISTS `p3`;
-
-CREATE TABLE `p3` (
-  `id` int(100) NOT NULL,
-  `kodikos` int(20) NOT NULL,
-  PRIMARY KEY (`id`,`kodikos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `p3` */
-
-insert  into `p3`(`id`,`kodikos`) values (1,0),(2,14),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0),(9,0),(10,0),(11,0),(12,0),(13,0),(14,0),(15,0),(16,0),(17,0),(18,0),(19,0),(20,15),(21,0),(22,0),(23,0),(24,0),(25,0),(26,0),(27,0),(28,0),(29,0),(30,0),(31,0),(32,0),(33,0),(34,0),(35,16),(36,0),(37,0),(38,0),(39,0),(40,0),(41,0),(42,0),(43,0),(44,0),(45,17),(46,0),(47,0),(48,0),(49,0),(50,0),(51,0),(52,0);
-
-/*Table structure for table `p4` */
-
-DROP TABLE IF EXISTS `p4`;
-
-CREATE TABLE `p4` (
-  `id` int(100) NOT NULL,
-  `kodikos` int(20) NOT NULL,
-  PRIMARY KEY (`id`,`kodikos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `p4` */
-
-insert  into `p4`(`id`,`kodikos`) values (1,0),(2,0),(3,13),(4,13),(5,0),(6,13),(7,13),(8,0),(9,0),(10,13),(11,13),(12,13),(13,0),(14,13),(15,13),(16,13),(17,13),(18,13),(19,13),(20,0),(21,13),(22,13),(23,0),(24,13),(25,13),(26,13),(27,13),(28,13),(29,0),(30,13),(31,13),(32,13),(33,13),(34,13),(35,0),(36,0),(37,0),(38,13),(39,0),(40,13),(41,13),(42,13),(43,13),(44,13),(45,0),(46,13),(47,0),(48,13),(49,13),(50,0),(51,13),(52,13);
-
-/*Table structure for table `players` */
+--
+-- Table structure for table `players`
+--
 
 DROP TABLE IF EXISTS `players`;
-
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `players` (
-  `username` varchar(20) CHARACTER SET utf8 DEFAULT 'null',
-  `paiktis` int(4) NOT NULL,
-  `token` varchar(32) DEFAULT NULL,
-  `idpaikti` int(4) NOT NULL,
-  `last_action` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`paiktis`,`idpaikti`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+  `player_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  `token` varchar(100) DEFAULT NULL,
+  `role` varchar(5) DEFAULT NULL,
+  `last_action` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`player_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*Data for the table `players` */
+--
+-- Dumping data for table `players`
+--
 
-insert  into `players`(`username`,`paiktis`,`token`,`idpaikti`,`last_action`) values ('',1,'15d4c9daf64ac1f65a5801c0c107bf74',100,'2020-01-12 13:31:43'),('',2,'89703ced141f2f7c3b0b04c050c96fb6',200,'2020-01-12 13:31:43');
-
-/* Trigger structure for table `game_status` */
-
-DELIMITER $$
-
-/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `game_status_update` */$$
-
-/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `game_status_update` BEFORE UPDATE ON `game_status` FOR EACH ROW BEGIN
-SET NEW.last_change = NOW();
-END */$$
-
-
+LOCK TABLES `players` WRITE;
+/*!40000 ALTER TABLE `players` DISABLE KEYS */;
+/*!40000 ALTER TABLE `players` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `player_last_action_init` BEFORE INSERT ON `players` 
+    FOR EACH ROW BEGIN
+		set NEW.last_action = now();
+    END */;;
 DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `player_last_action_update` BEFORE UPDATE ON `players` 
+    FOR EACH ROW BEGIN
+		set NEW.last_action = now();
+    END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
-/* Procedure structure for procedure `clean_board` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `clean_board` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board`()
+--
+-- Dumping routines for database 'adise_xrisa_eleni'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `clean_board` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board`()
 BEGIN
-REPLACE INTO board SELECT * FROM p4;
-END */$$
+REPLACE INTO board SELECT * FROM board_empty;
+END ;;
 DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `clean_game_status` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_game_status`()
+BEGIN
+update `game_status` set `status`='not active' ,`p_turn`=null ,`current_piece`=null ,`result`=null,`win_direction`='not set';
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `place_piece` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `place_piece`( X1 TINYINT(1), Y1 TINYINT(1),  piece_id INT)
+BEGIN
+UPDATE board   
+SET piece=piece_id WHERE x=X1 AND y=Y1;
+UPDATE pieces 
+SET available=false WHERE pieces_id=piece_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `reset_pieces` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reset_pieces`()
+BEGIN
+REPLACE INTO pieces SELECT * FROM pieces_available;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `reset_players` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reset_players`()
+BEGIN
+DELETE FROM `players`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
