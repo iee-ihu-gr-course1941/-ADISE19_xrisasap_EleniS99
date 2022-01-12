@@ -1,186 +1,197 @@
-quarto = {
-	currentTable: [],
-	_defaults: {
-		gameContainer: null
-	},
-	_init: function(options) {
-		this.options = this._extend(this._defaults, options);
-		this._createInterface();
-		this._dragEvents();
-	},
-	_createInterface: function() {
-		this.overlay = document.getElementById('overlay');
-		this.btnNewGame = document.getElementById('btn-new-game');
+console.clear();
 
-		if(this.options.gameContainer) {
-			this.createGrid();
-			this.piecesContainer = document.createElement('div');
-			this.piecesContainer.className = 'pieces-container';
-			this.options.gameContainer.appendChild(this.piecesContainer);
-			this.createPieces();
-			this.interfaceEvents();
-		}
-	},
-	_dragEvents: function() {
-		var draggedElement;
+const alert = document.getElementById("alert");
+alert.addEventListener("click", () => alert.className = "");
 
-		document.addEventListener('dragstart', function(e) {
-			// store a ref. on the dragged elem
-			if(e.target.className.match('piece') && e.target.parentElement.className === 'pieces-container'){
-				draggedElement = e.target;
-				// make it half transparent
-				draggedElement.style.opacity = 0.5;
-			}
-		}, false);
+class Piece {
+  constructor(color, density, height, shape) {
+    this.id = [color, density, height, shape].join("");
+    this.color = Piece.valueFromTraitAndNumber("color", color);
+    this.height = Piece.valueFromTraitAndNumber("height", height);
+    this.shape = Piece.valueFromTraitAndNumber("shape", shape);
+    this.density = Piece.valueFromTraitAndNumber("density", density);
+    this.x = undefined;
+    this.y = undefined;
+    this.element = document.createElement("span");
+    this.element.className = ["piece", this.color, this.density, this.height, this.shape].join(" ");
+    const piece  = "short"
+  }
 
-		document.addEventListener("dragover", function(e) {
-			e.preventDefault();
-			if(draggedElement && e.target.tagName.toLowerCase() === 'td') {
-				e.dataTransfer.dropEffect = "move";
-				e.target.style.background = 'lightgrey';
-			}
-		});
+  place(x, y) {
+    this.x = x;
+    this.y = y;
+    this.element.style.setProperty("--x", x);
+    this.element.style.setProperty("--y", y);
+    this.deactivate();
+  }
+  
+  placeInitial(x, y) {
+    this.place(x, y);
+    this.element.style.setProperty("--initial-x", x);
+    this.element.style.setProperty("--initial-y", y);
+  }
+  
+  reset() {
+    this.element.style.removeProperty("--x");
+    this.element.style.removeProperty("--y");
+    this.x = undefined;
+    this.y = undefined;
+    this.deactivate();
+  }
+  
+  activate() {
+    this.element.classList.add("active");
+  }
 
-		document.addEventListener("dragleave", function(e) {
-			e.preventDefault();
-			if(draggedElement && e.target.tagName.toLowerCase() === 'td') {
-				e.target.style.background = 'white';
-			}
-		});
+  deactivate() {
+    this.element.classList.remove("active");
+  }
+  
+  static valueFromTraitAndNumber(trait, number) {
+    if (trait === "color") return number ? "dark" : "light";
+    if (trait === "height") return number ? "tall" : "short";
+    if (trait === "shape") return number ? "square" : "round";
+    if (trait === "density") return number ? "hollow" : "solid";
+  }
+}
 
-		document.addEventListener('drop', function(e) {
-			e.preventDefault();
-			var cell = e.target;
-			if(draggedElement && cell.tagName.toLowerCase() === 'td'){
-				cell.appendChild(draggedElement);
-				cell.style.background = 'white';
-				this.updateCell(cell, draggedElement);
-				this.winCheck(cell);
-			}
-			draggedElement.style.opacity = 1;
-			draggedElement = null;
-		}.bind(this));
-	},
-	createGrid: function() {
-		var table = document.createElement('table');
-		for(var y = 1; y <= 4; y++){
-			var line = document.createElement('tr');
-			this.currentTable[y] = [];
-			for(var x = 1; x <= 4; x++){
-				var cell = document.createElement('td');
-				cell.dataset.x = x;
-				cell.dataset.y = y;
-				this.currentTable[y][x] = cell;
-				line.appendChild(cell);
-			}
-			table.appendChild(line);
-		}
-		this.options.gameContainer.appendChild(table);
-	},
-	createPieces: function() {
-		var pieces = [],
-			size = ['small', 'large'],
-			color = ['red', 'blue'],
-			shape = ['round', 'square'],
-			surface = ['plain', 'pierced'];
+class Game {
+  constructor() {
+    this.board = document.getElementById("board");
+    this.generateMatrix();
+    this.generatePieces();
+  }
+  
+  detectGameOver(color) {
+    const checks = [
+      [0, 1, 2, 3],   [4, 5, 6, 7],
+      [8, 9, 10, 11], [12, 13, 14, 15],
+      [0, 4, 8, 12],  [1, 5, 9, 13],
+      [2, 6, 10, 14], [3, 7, 11, 15],
+      [0, 5, 10, 15], [12, 9, 6, 3]
+    ];
+    const traits = ["color", "density", "height", "shape"];
+    const matches = [];
+    checks.forEach((indexes) => {
+      const matrixValues = indexes.map((idx) => this.matrix[idx]).filter((v) => v !== undefined);
+      if (matrixValues.length === 4) {
+        traits.forEach((trait, i) => {
+          const distinct = [...new Set(matrixValues.map((str) => str.charAt(i)))];
+          if (distinct.length === 1) {
+            const value = Piece.valueFromTraitAndNumber(trait, parseInt(distinct[0]));
+            matches.push({ trait, indexes, value });
+          }
+        });    
+      }
+    });
+    
+    if (matches.length) {
+      this.onGameOver(matches, color);
+    }
+  }
+  
+  generateMatrix() {
+    this.matrix = [
+      undefined, undefined, undefined, undefined,
+      undefined, undefined, undefined, undefined,
+      undefined, undefined, undefined, undefined,
+      undefined, undefined, undefined, undefined,
+    ];
+    this.matrix.forEach((_, i) => {
+      const y = Math.floor(i / 4);
+      const x = i % 4;
+      const tile = document.createElement("span");
+      tile.className = "tile";
+      const xLabel = ["A", "B", "C", "D"][x];
+      tile.setAttribute("label", `${xLabel}${y + 1}`);
+      tile.addEventListener("click", () => {
+        this.onTileClick(x, y);
+      });
+      this.board.appendChild(tile);
+    });
+  }
 
-		for(var i = 0; i < size.length; i++) {
-			for(var j = 0; j < color.length; j++) {
-				for(var k = 0; k < shape.length; k++) {
-					for(var l = 0; l < surface.length; l++) {
-						pieces.push({
-							size: size[i],
-							color: color[j],
-							shape: shape[k],
-							surface: surface[l]
-						});
-					}
-				}
-			}
-		}
+  generatePieces() {  
+    this.pieces = {};
+    const pieces = [
+      new Piece(0, 0, 0, 0), new Piece(0, 0, 0, 1), new Piece(0, 0, 1, 0), new Piece(0, 0, 1, 1),
+      new Piece(0, 1, 0, 0), new Piece(0, 1, 0, 1), new Piece(0, 1, 1, 0), new Piece(0, 1, 1, 1),
+      new Piece(1, 0, 0, 0), new Piece(1, 0, 0, 1), new Piece(1, 0, 1, 0), new Piece(1, 0, 1, 1),
+      new Piece(1, 1, 0, 0), new Piece(1, 1, 0, 1), new Piece(1, 1, 1, 0), new Piece(1, 1, 1, 1),
+    ];
+    pieces.forEach((piece, i) => {
+      this.pieces[piece.id] = piece;
+      let x, y;
+      if (i < 4) {
+        x = i;
+        y = -1;
+      } else if (i < 8) {
+        x = 4;
+        y = i % 4;
+      } else if (i < 12) {
+        x = 3 - (i % 4);
+        y = 4;
+      } else {
+        x = -1;
+        y = 3 - (i % 4);
+      }
+      piece.placeInitial(x, y);
+      piece.element.addEventListener("click", () => this.onPieceClick(piece));
+      piece.element.addEventListener("dblclick", () => this.onPieceDblClick(piece));
+      this.board.appendChild(piece.element);
+    });
+  }
+  
+  onGameOver(data, color) {
+    const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    setTimeout(() => {
+      const text = data.map(({ value }) => cap(value)).join(" / ");
+      alert.style.setProperty("--color", `var(--color-${color}`);
+      alert.innerHTML = `<div>Game Over!<br>${text}</div>`;
+      alert.className = "active";
+    }, 100);
+  }
 
-		pieces.forEach(function(piece) {
-			var uiPiece =  document.createElement('div');
-			uiPiece.draggable = true;
-			uiPiece.className = 'piece '+piece.size+' '+piece.color+' '+piece.shape+' '+piece.surface;
-			this.piecesContainer.appendChild(uiPiece);
-		}.bind(this));
-	},
-	updateCell: function(cell, piece) {
-		var particularities = piece.className.split(' ');
-		particularities.shift(); //Remove unwanted 'piece' first element to get only particularities
-		this.currentTable[cell.dataset.y][cell.dataset.x].dataset.piece = particularities;
-	},
-	setDragEvent: function() {
-		var cells = document.querySelectorAll('td');
-		for(var i = 0; i < cells.length; i++){
-			var cell = cells[i];
-			cell.addEventListener('mouseenter', function(e) {
-				if(this.mouseIsDown){
-					var cell = e.target;
-					if(cell.tagName.toLowerCase() === 'td'){
-						if(!this.isAlive(cell)){
-							this.toggleCellStatus(cell);
-						}
-					}
-				}
-			}.bind(this));
-		}
-	},
-	winCheck: function(playedCell) {
-		var relatives = {
-			line: [],
-			column: [],
-			left2rightDiagonal: [],
-			right2leftDiagonal: []
-		};
+  onPieceClick(piece) {
+    if (this.selectedPieceId === piece.id) {
+      piece.deactivate();
+      this.selectedPieceId = undefined;
+    } else {
+      if (this.selectedPieceId) {
+        this.pieces[this.selectedPieceId].deactivate();
+      }
+      piece.activate();
+      this.selectedPieceId = piece.id;
+    }
+  }
 
-		// Fill relatives
-		for (i = 1; i <= 4; i++) {
-			relatives.line.push(this.currentTable[playedCell.dataset.y][i]);
-			relatives.column.push(this.currentTable[i][playedCell.dataset.x]);
-			relatives.left2rightDiagonal.push(this.currentTable[i][i]);
-			relatives.right2leftDiagonal.push(this.currentTable[5-i][i]);
-		}
+  onPieceDblClick(piece) {
+    const idx = piece.y * 4 + piece.x;
+    if (this.matrix[idx] === piece.id) {
+      this.matrix[idx] = undefined;
+    }
+    piece.reset();
+    this.selectedPieceId = undefined;
+    
+  }
+  
+  onTileClick(x, y) {
+    if (this.selectedPieceId) {
+      this.placeSelectedPiece(x, y);
+    }
+  }
+  
+  placeSelectedPiece(x, y) {
+    const piece = this.pieces[this.selectedPieceId];
+    const idx = piece.y * 4 + piece.x;
+    if (this.matrix[idx] === piece.id) {
+      this.matrix[idx] = undefined;
+    }
+    piece.place(x, y);
+    this.matrix[y * 4 + x] = this.selectedPieceId;
+    this.selectedPieceId = undefined;
+    this.detectGameOver(piece.color);
+  }
+}
 
-		for (var type in relatives) {
-			var pieces = [];
-			relatives[type].forEach(function(cell){
-				if(cell.dataset.piece) {
-					pieces.push(cell.dataset.piece.split(','));
-				}
-			});	
-			if(pieces.length === 4) {
-				this.comparePieces(pieces);
-			}
-		}
-	},
-	comparePieces: function(pieces) {
-		
-		pieces[0].forEach(function(particularity) {
-			var commonCells = 1;
-			for(var i=1; i<=3; i++) {
-				if(pieces[i].indexOf(particularity) !== -1) {
-					commonCells++;
-				}
-			}
-			if(commonCells === 4) {
-				console.log('QUARTO');
-			}
-		});
-	},
-	interfaceEvents: function() {
-		this.btnNewGame.addEventListener('click', function(e) {
-			this.overlay.className += " hidden";
-			this.btnNewGame.parentElement.className += " hidden";
-		}.bind(this));
-	},
-	_extend : function(a, b) {
-		for(var key in b) {
-			if(b.hasOwnProperty(key)) {
-				a[key] = b[key];
-			}
-		}
-		return a;
-	}
-};
+const game = new Game();
