@@ -10,7 +10,6 @@ class Game
   var x=0;
   var y=0;
   //constants
-  this.imagePath="./images/";
   this.boardSize=4;
   this.tileSize=45;
   this.tokenSize=45;
@@ -38,25 +37,11 @@ class Game
   this.playerTurn=2;
   this.winningPlayer=-1;
 
-  //load rules
-  var req=new XMLHttpRequest();
-  req.onload=function()
-  {
-   document.getElementById("rules").innerHTML=this.responseText;
-  };
-  req.open("GET","rules.html");
-  req.send();
-
-  //create the baord
-  this.board=new Board(this.boardSize,this.boardSize,
-    this.tileSize,this.tileSize,
-    "#666666");
-
   //selection token
   this.selectedToken=-1;
   this.selectionToken=new Token(-this.tokenSize,-this.tokenSize,
     this.tokenSize,this.tokenSize,
-    this.imagePath+"selection.png");
+    "images/selection.png");
 
   //help token
   x=this.tileSize*this.boardSize+this.boardSize+this.border;
@@ -122,7 +107,7 @@ class Game
   y+=this.border+this.boardSize*this.tileSize+this.boardSize;
   token=new Token(x,y,
      this.tokenSize,this.tokenSize,
-     this.imagePath+"bcfn.png");
+     "images/bcfn.png");
   token.type=0b1101;
   this.board.addToken(token);
   i++;
