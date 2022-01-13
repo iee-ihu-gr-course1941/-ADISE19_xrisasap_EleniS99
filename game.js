@@ -12,8 +12,8 @@ class Game
   //constants
   this.imagePath="./images/";
   this.boardSize=4;
-  this.tileSize=45;
-  this.tokenSize=45;
+  this.tileSize=80;
+  this.tokenSize=80;
   this.border=5;
 
   //html shit
@@ -38,19 +38,9 @@ class Game
   this.playerTurn=2;
   this.winningPlayer=-1;
 
-  //load rules
-  var req=new XMLHttpRequest();
-  req.onload=function()
-  {
-   document.getElementById("rules").innerHTML=this.responseText;
-  };
-  req.open("GET","rules.html");
-  req.send();
-
   //create the baord
   this.board=new Board(this.boardSize,this.boardSize,
-    this.tileSize,this.tileSize,
-    "#666666");
+    this.tileSize,this.tileSize, "#BB1020");
 
   //selection token
   this.selectedToken=-1;
@@ -58,12 +48,6 @@ class Game
     this.tokenSize,this.tokenSize,
     this.imagePath+"selection.png");
 
-  //help token
-  x=this.tileSize*this.boardSize+this.boardSize+this.border;
-  y=this.border;
-  this.board.addToken(new Token(x,y,
-     30,30,
-     this.imagePath+"help.png"));
 
   //turn token
   x=this.tileSize*this.boardSize+this.boardSize+this.border;
