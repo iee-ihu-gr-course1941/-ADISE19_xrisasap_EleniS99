@@ -1,2 +1,0 @@
-mysqldump adise_xrisa_eleni -u it175071 -p -R  > basi.sql
-sed -i -r 's/DEFINER=`[^`]*`@`[^`]*`//g' basi.sql
