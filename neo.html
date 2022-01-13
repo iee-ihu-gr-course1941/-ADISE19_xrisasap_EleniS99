@@ -1,22 +1,27 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Javascript Quarto | Denis Fegnoux</title>
-  <link rel="stylesheet" href="quarto.css">
-  
-</head>
-<body>
-	<div id="overlay" class="overlay"></div>
-	<div class="menu">
-		<button id="btn-new-game">New game</button>
-	</div>
-	<div id="game-container"></div>
-	<script type="text/javascript" src="quarto.js"></script>
-	<script>
-		quarto._init({
-			gameContainer: document.getElementById('game-container')
-		});
-	</script>
-</body>
+<html>
+ <meta id="viewport" name="viewport"
+  content="user-scalable=no,width=223,height=427">
+ <head>
+ <script type="text/javascript" src="board.js"></script>
+
+ <script type="text/javascript" src="game.js"></script>
+
+
+ </head>
+ <body id="body">
+  <div id="rules"
+   style="position:absolute;
+    overflow:auto;
+    background:#cacaca;
+    display:none;">
+  </div>
+  <div id="win"
+   style="position:absolute;
+    background:white;
+    text-align:center;
+    display:none;">The winner is:</div>
+ </body>
 </html>
+<script>
+var game=new Game();
+</script>
