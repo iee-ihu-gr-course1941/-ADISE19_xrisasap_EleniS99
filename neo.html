@@ -1,12 +1,9 @@
-<!doctype html>
 <html>
  <meta id="viewport" name="viewport"
   content="user-scalable=no,width=223,height=427">
  <head>
- <script type="text/javascript" src="board.js"></script>
-
- <script type="text/javascript" src="game.js"></script>
-
+  <script type="text/javascript" src="board.js"></script>
+  <script type="text/javascript" src="game.js"></script>
 
  </head>
  <body id="body">
@@ -26,3 +23,22 @@
 <script>
 var game=new Game();
 </script>
+
+
+
+
+  <link rel="stylesheet" href="quarto.css">
+
+<body>
+	<div id="overlay" class="overlay"></div>
+	<div class="menu">
+		<button id="btn-new-game">New game</button>
+	</div>
+	<div id="game-container"></div>
+	<script type="text/javascript" src="quarto.js"></script>
+	<script>
+		quarto._init({
+			gameContainer: document.getElementById('game-container')
+		});
+	</script>
+</body>
