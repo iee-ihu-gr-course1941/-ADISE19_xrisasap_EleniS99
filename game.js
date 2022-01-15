@@ -5,18 +5,17 @@ class Game
 
  constructor()
  {
-  //var
+  //metavlhtes
   var i=0;
   var x=0;
   var y=0;
-  //constants
+  //epafes
   this.imagePath="./images/";
   this.boardSize=4;
   this.tileSize=80;
   this.tokenSize=80;
   this.border=5;
 
-  //html shit
   document.getElementById('viewport').
    setAttribute( 'content',"user-scalable=no,width="+
      window.innerWidth+",height="+window.innerHeight);
@@ -68,7 +67,7 @@ class Game
   //markes Quarto
   var token;
 
-  //olo ble
+  //ble eksw aspro mesa
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -80,7 +79,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //ble eksw keno mesa
+  //ble eksw keno mesa me gemato daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
