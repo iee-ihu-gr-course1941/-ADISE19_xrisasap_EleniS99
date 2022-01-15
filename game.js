@@ -21,45 +21,35 @@ class Game
    setAttribute( 'content',"user-scalable=no,width="+
      window.innerWidth+",height="+window.innerHeight);
 
-  var rulesDiv=document.getElementById("rules");
-  rulesDiv.style.height=this.tileSize*this.boardSize+this.boardSize+
-   this.tokenSize*4+4;
-  rulesDiv.style.width=this.tileSize*this.boardSize+this.boardSize;
-  rulesDiv.style.top=this.border;
-  rulesDiv.style.left=this.border;
-
   var winDiv=document.getElementById("win");
   winDiv.style.height=this.tokenSize*4+4;
   winDiv.style.width=this.tokenSize*4+4;
   winDiv.style.top=this.tileSize*this.boardSize+this.boardSize+this.border;
   winDiv.style.left=this.border;
 
-  //game variables
+  //metavlhtes tou paixnidiou
   this.playerTurn=2;
   this.winningPlayer=-1;
 
-
-  //create the baord
+  //dhmiourgia tou pinaka
   this.board=new Board(this.boardSize,this.boardSize,
     this.tileSize,this.tileSize,
     "#EAC6F8");
-
-  //selection token
+  
+  //epilegmenh marka
   this.selectedToken=-1;
   this.selectionToken=new Token(-this.tokenSize,-this.tokenSize,
     this.tokenSize,this.tokenSize,
     this.imagePath+"selection.png");
-
-
-
-  //turn token
+  
+  //strofi markas
   x=this.tileSize*this.boardSize+this.boardSize+this.border;
   y=this.border+41;
   this.turnToken=new Token(x,y,
     30,30,
     this.imagePath+"turn.png");
 
-  //player 1 token
+  //marka paikth 1
   x=this.tileSize*this.boardSize+this.boardSize+this.border;
   y=this.border+60;
   this.p1Token=new Token(x,y,
@@ -67,7 +57,7 @@ class Game
     this.imagePath+"p1.png");
   this.p1Token.gfx.style.zIndex=2;
 
-  //player 2 token
+  //marka paikth 2
   x=this.tileSize*this.boardSize+this.boardSize+this.border;
   y=this.border+60;
   this.p2Token=new Token(x,y,
@@ -75,10 +65,10 @@ class Game
     this.imagePath+"p2.png");
   this.p2Token.gfx.style.zIndex=2;
 
-  //Quarto tokens
+  //markes Quarto
   var token;
 
-  //black circle empty notringed
+  //olo ble
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -90,7 +80,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black circle empty ringed
+  //ble eksw keno mesa
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -102,7 +92,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black circle filled notringed
+  //ble kyklos gematos
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -114,7 +104,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black circle filled ringed
+  //ble kyklos me gemato daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -126,7 +116,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black square empty notringed
+  //ble tetragwno keno
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -138,7 +128,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black square empty ringed
+  //ble tetragwno me adeio daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -150,7 +140,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black square filled notringed
+  //ble tetragwno gemato
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -162,7 +152,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //black square filled ringed
+  //ble tetragwno me gemato daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -174,7 +164,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white circle empty notringed
+  //leukos kyklos kenos
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -186,7 +176,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white circle empty ringed
+  //leukos kyklos me keno dantylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -198,7 +188,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white circle filled notringed
+  //leukos kyklos gematos 
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -210,7 +200,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white circle fille ringed
+  //leukos kyklos me gemato daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -222,7 +212,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white square empty notringed
+  //leuko tetragwno me keno 
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -234,7 +224,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white square empty ringed
+  //leuko tetragwno me adeio daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -246,7 +236,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white square filled notringed
+  //leuko tetragwno gemismeno
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -258,7 +248,7 @@ class Game
   this.board.addToken(token);
   i++;
 
-  //white square filled ringed
+  //leuko tetragwno me gemato daktylio
   x=(i%4)*this.tokenSize+(i%4);
   x+=this.border;
   y=((i/4)|0)*this.tokenSize+((i/4)|0);
@@ -275,20 +265,19 @@ class Game
 
  refresh()
  {
-  //draw the board [which will draw the tokens]
+  //sxediase ton pinaka [pou tha sxediasei tia markes]
   this.board.draw(this.border,this.border);
-  //draw other tokens
-  if(this.winningPlayer!=-1) //game ended
+  //sxediase alle markes
+  if(this.winningPlayer!=-1) //telos paixnidiou
   {
-   //show the win div
    var winDiv=document.getElementById("win");
    winDiv.style.display="block";
    winDiv.style.zIndex=1;
-   //hide turn token and players token
+   //apokripsi ths strofis ths markas kai ths markas twn paiktwn
    this.turnToken.hidden=true;
    this.p1Token.hidden=true;
    this.p2Token.hidden=true;
-   //setup the right player token to show the winner
+   //ruthmise thn swsth marka paikth gia na bgei o nikhths
    if(this.winningPlayer==2)
    {
     this.p2Token.hidden=false;
@@ -321,11 +310,11 @@ class Game
   if(this.winningPlayer!=-1) return; //game ended
   if(this.selectedToken!=-1) //there's a selected token
   {
-   //move it to the selected tile
+   //metakinhseto sto epilegmeno plakidio
    this.board.board[y][x].token=this.board.tokens[this.selectedToken];
-   //remove it from the available tokens
+   //aferesai to apo tis diathesimes markes
    this.board.tokens[this.selectedToken]=null;
-   //no selection and move the token out of screen
+   //xwris epilogh metakinhse thn marka ektos othonhs
    this.selectedToken=-1;
    this.selectionToken.x=-this.selectionToken.width;
    this.selectionToken.y=-this.selectionToken.height;
@@ -355,7 +344,7 @@ class Game
   if(this.selectedToken==-1 && //no selection
     this.board.tokens[index]!=null) //token not already placed
   {
-   //save selected token, move the selection over and draw it
+   //apothikeysai thn epilegmenh marka, metakineisai thn epilogh kai sxediase thn 
    this.selectedToken=index;
    this.selectionToken.x=this.board.tokens[index].x;
    this.selectionToken.y=this.board.tokens[index].y;
@@ -366,7 +355,6 @@ class Game
 
  checkWin()
  {
-  //here comes bitwise magic!
   var orRes=0;
   var andRes=0;
   //x-wise
@@ -387,14 +375,14 @@ class Game
    }
    if(andRes!=0)//at last 1 bit is 1
    {
-    //all pieces have 1 in the same bit [have 1 common characteristic]
+    //ola ta kommatia exoun 1 sto idio bit [exoun ena koino xaraktiristiko]
     this.winningPlayer=this.playerTurn;
     this.refresh();
     return;
    }
-   if(orRes!=15)//at last 1 bit is 0
+   if(orRes!=15)
    {
-    //all pieces have 0 in the same bit [have 1 common characteristic]
+    //ola ta kommatia exoun 0 sto idio bit [exoun ena koino xaraktiristiko]
     this.winningPlayer=this.playerTurn;
     this.refresh();
     return;
@@ -418,14 +406,14 @@ class Game
    }
    if(andRes!=0)//at last 1 bit is 1
    {
-    //all pieces have 1 in the same bit [have 1 common characteristic]
+    //ola ta kommatia exoun 1 sto idio bit [exoun ena koino xaraktiristiko]
     this.winningPlayer=this.playerTurn;
     this.refresh();
     return;
    }
    if(orRes!=15)//at last 1 bit is 0
    {
-    //all pieces have 0 in the same bit [have 1 common characteristic]
+    //ola ta kommatia exoun 0 sto idio bit [exoun ena koino xaraktiristiko]
     this.winningPlayer=this.playerTurn;
     this.refresh();
     return;
@@ -447,14 +435,14 @@ class Game
    andRes&=this.board.board[y][x].token.type;
    orRes|=this.board.board[y][x].token.type;
   }
-  if(andRes!=0)//at last 1 bit is 1
+  if(andRes!=0)
   {
    //all pieces have 1 in the same bit [have 1 common characteristic]
    this.winningPlayer=this.playerTurn;
    this.refresh();
    return;
   }
-  if(orRes!=15)//at last 1 bit is 0
+  if(orRes!=15)
   {
    //all pieces have 0 in the same bit [have 1 common characteristic]
    this.winningPlayer=this.playerTurn;
@@ -478,14 +466,14 @@ class Game
   }
   if(andRes!=0)//at last 1 bit is 1
   {
-   //all pieces have 1 in the same bit [have 1 common characteristic]
+   //ola ta kommatia exoun 1 sto idio bit [exoun ena koino xaraktiristiko]
    this.winningPlayer=this.playerTurn;
    this.refresh();
    return;
   }
   if(orRes!=15)//at last 1 bit is 0
   {
-   //all pieces have 0 in the same bit [have 1 common characteristic]
+   //ola ta kommatia exoun 0 sto idio bit [exoun ena koino xaraktiristiko]
    this.winningPlayer=this.playerTurn;
    this.refresh();
    return;
