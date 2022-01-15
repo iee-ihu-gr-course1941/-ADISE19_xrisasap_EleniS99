@@ -324,21 +324,6 @@ class Game
 
  onTokenClick(index)
  {
-  if(index==0) //help token
-  {
-   var rulesDiv=document.getElementById("rules");
-   if(rulesDiv.style.display!="block")
-   {
-    rulesDiv.style.zIndex=3;
-    rulesDiv.style.display="block";
-   }
-   else
-   {
-    rulesDiv.style.zIndex=0;
-    rulesDiv.style.display="none";
-   }
-   return;
-  }
   if(this.winningPlayer!=-1) return; //game ended
   if(this.selectedToken==-1 && //no selection
     this.board.tokens[index]!=null) //token not already placed
